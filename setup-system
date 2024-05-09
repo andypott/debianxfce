@@ -6,6 +6,10 @@ if [ -z $1 ]; then
 fi
 sudo hostnamectl hostname $1
 
+sudo apt install --assume-yes software-properties-common
+sudo apt-add-repository --component non-free
+sudo apt-add-repository --component contrib
+
 sudo apt-get update
 sudo apt-get --assume-yes upgrade
 sudo apt-get --assume-yes install $(cat ./pkgs)
