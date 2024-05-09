@@ -1,0 +1,21 @@
+#!/bin/bash
+# Set hostname
+if [ -z $1 ]; then
+    echo "No hostname provided"
+    exit
+fi
+sudo hostnamectl hostname $1
+
+sudo apt-get update
+sudo apt-get --assume-yes upgrade
+sudo apt-get --assume-yes install $(cat ./pkgs)
+
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo flatpak remote-modify --enable flathub
+
+# Copy system config files
+sudo rsync -rv ./system/ /
+
+if [ "$1" == "ultra24" ]; then
+    sudo systemctl enable var-mnt-data.mount
+fi

@@ -1,0 +1,2 @@
+#  Allow sudo users to run commands without a password
+%sudo	ALL=(ALL)	NOPASSWD: ALL

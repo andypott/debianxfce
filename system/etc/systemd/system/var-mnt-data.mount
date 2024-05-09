@@ -1,0 +1,11 @@
+[Unit]
+Description=Mount data drive on ultra24
+
+[Mount]
+What=/dev/disk/by-uuid/88a3f90a-533e-4503-a951-14049b6ca7b2
+Where=/var/mnt/data
+Type=btrfs
+Options=subvol=data,compress=zstd:1
+
+[Install]
+WantedBy=multi-user.target

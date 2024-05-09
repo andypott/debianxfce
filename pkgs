@@ -1,0 +1,12 @@
+alacritty
+build-essential
+curl
+flatpak
+fonts-jetbrains-mono
+fwupd
+fzf
+git
+ripgrep
+rsync
+steam-devices
+tree

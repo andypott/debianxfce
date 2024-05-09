@@ -1,0 +1,78 @@
+#!/bin/bash
+
+add_flatpaks() {
+    flatpak install flathub\
+        com.valvesoftware.Steam
+}
+
+dot_dirs="./home"
+
+create_dirs() {
+    for dir in $dot_dirs; do
+        if [ -d "$dir" ]; then
+            pushd $dir
+                to_create=$(find . -mindepth 1 -type d -printf "%P ")
+                for d in $to_create; do
+                    mkdir -p "$HOME/$d"
+                done
+            popd
+        fi
+    done
+}
+
+create_links() {
+    for dir in $dot_dirs; do
+        if [ -d "$dir" ]; then
+            pushd $dir
+                to_create=$(find . -mindepth 1 -type f -printf "%P ")
+                for d in $to_create; do
+                    ln -sf "$(pwd)/$d" "$HOME/$d"
+                done
+            popd
+        fi
+    done
+}
+
+get_fonts() {
+    mkdir -p ~/.local/share/fonts
+
+    if [ ! -f ~/.local/share/fonts/SymbolsNerdFont-Regular.ttf ]; then
+        wget -o /dev/null -O ~/.local/share/fonts/SymbolsNerdFont-Regular.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFont-Regular.ttf?raw=true
+    fi
+
+    if [ ! -f ~/.local/share/fonts/SymbolsNerdFontMono-Regular.ttf ]; then
+        wget -o /dev/null -O ~/.local/share/fonts/SymbolsNerdFontMono-Regular.ttf https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFontMono-Regular.ttf?raw=true
+    fi
+
+    fc-cache -f
+}
+
+install_rustup() {
+    pushd $HOME
+    curl -sSf https://sh.rustup.rs | sh -s -- -y --no-modify-path
+    popd
+}
+
+install_nvm() {
+    PROFILE=/dev/null bash -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash'
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm install --lts
+}
+
+install_brew_packages() {
+    cat ./brew_pkgs | xargs brew install
+}
+
+setup_xfce() {
+    xfconf-query -c xfwm4 -p /general/vblank_mode -s vblank
+    xfconf-query -c xsettings -p /Net/ThemeName -s Adwaita-dark
+    xfconf-query -c xfce4-notifyd -p /notification-log -s true
+}
+
+add_flatpaks
+install_brew_packages
+create_dirs
+create_links
+get_fonts
+install_rustup
+install_nvm
+setup_xfce
