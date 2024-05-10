@@ -9,8 +9,11 @@ fzf
 git
 g++-mipsel-linux-gnu
 gcc-mipsel-linux-gnu
+gvfs-backends
+python3-venv
 ripgrep
 rsync
+smbclient
 steam-devices
 tree
 xinput
