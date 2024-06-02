@@ -66,10 +66,10 @@ setup_xfce() {
     xfconf-query -c xfwm4 -p /general/vblank_mode -s vblank
     xfconf-query -c xsettings -p /Net/ThemeName -s Adwaita-dark
     xfconf-query -c xfce4-notifyd -p /notification-log -s true --create --type bool
-    xfconf-query -c xfce4-keyboard-shortcuts -p '/xfwm4/custom/<Super>Left' -s tile_left_key --create --type string
-    xfconf-query -c xfce4-keyboard-shortcuts -p '/xfwm4/custom/<Super>Right' -s tile_right_key --create --type string
-    xfconf-query -c xfce4-keyboard-shortcuts -p '/xfwm4/custom/<Super>Up' -s maximize_window_key --create --type string
-    xfconf-query -c xfce4-keyboard-shortcuts -p '/commands/custom/<Super>space' -s xfce4-appfinder --create --type string
+    #xfconf-query -c xfce4-keyboard-shortcuts -p '/xfwm4/custom/<Super>Left' -s tile_left_key --create --type string
+    #xfconf-query -c xfce4-keyboard-shortcuts -p '/xfwm4/custom/<Super>Right' -s tile_right_key --create --type string # For some reason this doesn't work after a reboot, all the others do
+    #xfconf-query -c xfce4-keyboard-shortcuts -p '/xfwm4/custom/<Super>Up' -s maximize_window_key --create --type string
+    #xfconf-query -c xfce4-keyboard-shortcuts -p '/commands/custom/<Super>space' -s xfce4-appfinder --create --type string
     xfconf-query -c xfce4-keyboard-shortcuts -p '/commands/custom/<Super>Return' -s alacritty --create --type string
 }
 
