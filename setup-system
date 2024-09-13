@@ -23,3 +23,7 @@ sudo rsync -rv ./system/ /
 if [ "$1" == "ultra24" ]; then
     sudo systemctl enable var-mnt-data.mount
 fi
+
+git clone https://github.com/ValveSoftware/steam-devices /tmp/steam-devices
+sudo cp /tmp/steam-devices/*.rules /etc/udev/rules.d/.
+rm -rf /tmp/steam-devices

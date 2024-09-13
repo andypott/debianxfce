@@ -23,7 +23,7 @@ return {
 				"jsonls",
 				"lua_ls",
 				"rust_analyzer",
-				"tsserver",
+				"ts_ls",
 			},
 			handlers = {
 				default_setup,

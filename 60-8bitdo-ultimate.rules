@@ -1,0 +1,2 @@
+# 8bitdo ultimate 
+KERNEL=="hidraw*", ATTRS{idVendor}=="2dc8", ATTRS{idProduct}=="3106", MODE="0660", TAG+="uaccess"
